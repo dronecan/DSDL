@@ -7,6 +7,6 @@ logging.basicConfig(stream=sys.stderr, level='DEBUG', format='%(levelname)s: %(m
 
 from uavcan import dsdl
 
-parsed = dsdl.parse_namespaces(['uavcan','com','ardupilot']);
+parsed = dsdl.parse_namespaces(['uavcan','com','ardupilot', 'dronecan']);
 if parsed:
     logging.info('%d data types parsed successfully', len(parsed))
