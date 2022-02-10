@@ -1,5 +1,5 @@
 This directory contains the DSDL for the ArduPilot vendor specific
-UAVCAN messages.
+DroneCAN messages.
 
 For service messages we use IDs starting at 200
 
