@@ -1,0 +1,9 @@
+#
+# Smart battery cell voltages & resistances
+# Rate: set by parameter on smart battery (default off)
+#
+
+float16[<=24] voltages            # [mV]
+float16[<=24] resistances         # [m Ohm] cell resistances: NAN first element: field not provided
+
+# Payload Size : 96B

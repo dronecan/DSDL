@@ -2,8 +2,8 @@
 # Smart battery data to be sent continuously (1 - 10Hz)
 #
 
-float16 temperature             # [C]
-float32 current                 # [Ampere]
+float16 temperature             # [C]      : Pack mounted thermistor (preferably installed between cells), NAN: field not provided
+float32 current                 # [Ampere] : Postive: defined as a discharge current. Negitive: deifined as a charging current, NAN: field not provided
 float16 voltage                 # [Volt]
 uint32 capacity_consumed        # [mAh]
 uint32 capacity_remaining       # [mAh]
@@ -24,3 +24,5 @@ uint32 STATUS_FLAG_CELL_BALANCING       = 2048
 uint32 STATUS_FLAG_CELL_FAULT           = 4096
 uint32 STATUS_FLAG_PROTECTIONS_ENABLED  = 8192
 uint32 STATUS_FLAG_REQUIRES_SERVICE     = 16384
+
+#Payload Bytes:  18B

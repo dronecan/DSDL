@@ -1,11 +1,59 @@
 #
-# Smart battery data to be sent periodically (frequency TBD)
+# Smart battery data to be sent statically upon request
 #
+
+# Should we have separate CAN fields for other types of battery measurement devices???? IE not smart_batteries but still on CAN? 
+# For example there are many CAN nodes that currently take an analog only monitor voltage only, current only, or current and voltage and sne d that data using the current smartbatt CAN message
+# I don't think having additional mesages for other types of monitors makes sense?
+#
+# uint32 measurement_capabilities              # type mask of capabilities?  measurement (voltage, cell voltages, temperatures, etc.) 
+# uint32 estimation_capabilities               # estimator type ie columb counter, columb ++ impedance estimator, EKF 2 state, UKF, SOH estimated, others
+
 
 uint8[<=50] name                    # Formatted as manufacturer_product
 uint8[<=16] serial_number           # Serial number in ASCII characters, 0 terminated
 uint8[<=11] manufacture_date        # Manufacture date (DD/MM/YYYY) in ASCII characters, 0 terminated
-uint32 design_capacity              # [mAh]
-uint32 actual_capacity              # [mAh]
-uint16 cycle_count
-float16[<=24] cell_voltages         # [mV]
+uint32 design_capacity              # [mAh] Fully Charged Design Capacity. UINT32_MAX: field not provided.
+
+uint8 cells_in_series               # Number of battery cell in series. UINT8_MAX: field not provided.
+
+# Nominal voltage of the battery pack
+# the nominal Voltage can be used for conversion between W-h and A-h
+# if the value of this field is 0, the conversion should be omitted.
+float16 nominal_voltage             # [Volt]
+
+uint16 discharge_minimum_voltage   # [mVolt] Minimum per-cell voltage when discharging. UINT16_MAX: field not provided.
+uint16 charging_minimum_voltage    # [mVolt] Minimum per-cell voltage when charging. UINT16_MAX: field not provided.
+uint16 charging_maximum_voltage    # [mVolt] Maximum per-cell voltage when charged. 0: field not provided.
+
+uint32 discharge_maximum_current       # [mA] Maximum pack continuous discharge current. 0: field not provided.
+uint32 discharge_maximum_burst_current # [mA] Maximum pack discharge burst current for 30 seconds. 0: field not provided
+
+# WIP: Items could change in a vehicle with a charger and solar panels, generator, fuel cell, etc.
+
+
+# WIP:: Note this could change in a vehicle with a charger
+uint32 actual_capacity              # [mAh] Predicted battery capacity when fully charged (accounting for battery degradation)
+
+
+# Number of Charge/Discharge Cycles
+# A charge cycle is defined as a complete discharge and charge.
+# IE when the system uses all of the battery's available energy capacity.
+# Please note that this value doesn't mean that the cycle count should be incremented at every charge.
+# For example, if half of a battery's charge is used in one run,
+# and then recharged fully that is half of a cycle. If the same thing occurs again
+# then the charge cycle count would be incremented once, not twice.
+uint16 cycle_count                  # UINT16_MAX: field not provided.
+
+## State of Health could change without charger
+
+#
+# State of Health (SOH) estimate, in percent.
+# http://en.wikipedia.org/wiki/State_of_health
+#
+uint7 STATE_OF_HEALTH_UNKNOWN = 127     # Use this constant if SOH cannot be estimated
+uint7 state_of_health_pct               # Health of the battery, in percent, optional
+
+## NOTES
+# PAYLOAD MESSAGE BYTES: 25B data fields + max. 77B char fields
+# ALSO if this is static or periodic we should lean towards having "less useful" fields rather than adding additional messages later....
