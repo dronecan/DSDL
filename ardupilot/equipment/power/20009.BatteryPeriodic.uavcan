@@ -1,5 +1,5 @@
 #
-# Smart battery data to be sent statically upon request
+# Battery data to be sent statically upon request or periodically at a low rate
 #
 
 # Should we have separate CAN fields for other types of battery measurement devices???? IE not smart_batteries but still on CAN? 

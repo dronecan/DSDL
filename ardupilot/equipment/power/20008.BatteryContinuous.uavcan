@@ -1,5 +1,5 @@
 #
-# Smart battery data to be sent continuously (1 - 10Hz)
+# Battery data to be sent continuously (1 - 10Hz)
 #
 
 float16 temperature             # [C]      : Pack mounted thermistor (preferably installed between cells), NAN: field not provided
