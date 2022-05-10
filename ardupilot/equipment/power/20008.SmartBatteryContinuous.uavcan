@@ -5,24 +5,26 @@
 float16 temperature             # [C]      : Pack mounted thermistor (preferably installed between cells), NAN: field not provided
 float32 current                 # [Ampere] : Postive: defined as a discharge current. Negitive: deifined as a charging current, NAN: field not provided
 float16 voltage                 # [Volt]
-uint32 capacity_consumed        # [mAh]
+uint32 capacity_consumed        # [mAh]    : Current consumed since boot.
 uint32 capacity_remaining       # [mAh]
+uint32 full_charge_capacity     # [mAh]    : Predicted battery capacity when fully charged (accounting for battery degradation)
 uint32 status_flags
 
-uint32 STATUS_FLAG_IN_USE               = 1
-uint32 STATUS_FLAG_READY_TO_USE         = 2
-uint32 STATUS_FLAG_CHARGING             = 4
-uint32 STATUS_FLAG_OVER_TEMP            = 8
-uint32 STATUS_FLAG_UNDER_TEMP           = 16
-uint32 STATUS_FLAG_OVER_VOLT            = 32
-uint32 STATUS_FLAG_UNDER_VOLT           = 64
-uint32 STATUS_FLAG_OVER_CURRENT         = 128
-uint32 STATUS_FLAG_SHORT_CIRCUIT        = 256
-uint32 STATUS_FLAG_SAFETY_FAULT         = 512
-uint32 STATUS_FLAG_CELL_IMBALANCE       = 1024
-uint32 STATUS_FLAG_CELL_BALANCING       = 2048
-uint32 STATUS_FLAG_CELL_FAULT           = 4096
-uint32 STATUS_FLAG_PROTECTIONS_ENABLED  = 8192
-uint32 STATUS_FLAG_REQUIRES_SERVICE     = 16384
-
-#Payload Bytes:  18B
+uint32 STATUS_FLAG_READY_TO_USE                             = 1
+uint32 STATUS_FLAG_CHARGING                                 = 2
+uint32 STATUS_FLAG_CELL_BALANCING                           = 4
+uint32 STATUS_FLAG_FAULT_CELL_IMBALANCE                     = 8
+uint32 STATUS_FLAG_AUTO_DISCHARGING                         = 16
+uint32 STATUS_FLAG_REQUIRES_SERVICE                         = 32
+uint32 STATUS_FLAG_BAD_BATTERY                              = 64
+uint32 STATUS_FLAG_PROTECTIONS_ENABLED                      = 128
+uint32 STATUS_FLAG_FAULT_PROTECTION_SYSTEM                  = 256
+uint32 STATUS_FLAG_FAULT_OVER_VOLT                          = 512
+uint32 STATUS_FLAG_FAULT_UNDER_VOLT                         = 1024
+uint32 STATUS_FLAG_FAULT_OVER_TEMP                          = 2048
+uint32 STATUS_FLAG_FAULT_UNDER_TEMP                         = 4096
+uint32 STATUS_FLAG_FAULT_OVER_CURRENT                       = 8192
+uint32 STATUS_FLAG_FAULT_SHORT_CIRCUIT                      = 16384
+uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_VOLTAGE               = 32768
+uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_FIRMWARE              = 65536
+uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_CELLS_CONFIGURATION   = 16384
