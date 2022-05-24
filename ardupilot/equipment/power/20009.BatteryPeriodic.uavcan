@@ -2,11 +2,18 @@
 # Battery data to be sent statically upon request or periodically at a low rate
 #
 
-# Should we have separate CAN fields for other types of battery measurement devices???? IE not smart_batteries but still on CAN? 
-# For example there are many CAN nodes that currently take an analog only monitor voltage only, current only, or current and voltage and sne d that data using the current smartbatt CAN message
-# I don't think having additional mesages for other types of monitors makes sense?
-#
-# uint32 measurement_capabilities   # type mask of capabilities?  measurement (voltage, cell voltages, temperatures, etc.)
+# WIP: capability flags, are these really helpful? Knowing we could request cell voltages/resitances would be useful, or the host
+# could just send the request and see
+uint32 MEASUREMENT_CAPABILITY_VOLTAGE = 1
+uint32 MEASUREMENT_CAPABILITY_CURRENT = 2
+uint32 MEASUREMENT_CAPABILITY_TEMPERATURE = 4
+uint32 MEASUREMENT_CAPABILITY_STATE_OF_HEALTH = 8
+uint32 MEASUREMENT_CAPABILITY_CYCLE_COUNT = 16
+uint32 MEASUREMENT_CAPABILITY_CELL_VOLTAGES = 32
+uint32 MEASUREMENT_CAPABILITY_CELL_RESISTANCES = 64
+# uint32 measurement_capabilities   # type mask of capabilities: voltage, cell voltages, temperatures, etc.
+
+# Same here. What usefulness does knowing the estimation method provide? How would this information be used?
 # uint32 estimation_capabilities    # estimator type ie columb counter, columb ++ impedance estimator, EKF 2 state, UKF, SOH estimated, others
 
 uint8[<=50] name                    # Formatted as manufacturer_product, 0 terminated
