@@ -2,20 +2,6 @@
 # Battery data to be sent statically upon request or periodically at a low rate
 #
 
-# WIP: capability flags, are these really helpful? Knowing we could request cell voltages/resitances would be useful, or the host
-# could just send the request and see
-uint32 MEASUREMENT_CAPABILITY_VOLTAGE = 1
-uint32 MEASUREMENT_CAPABILITY_CURRENT = 2
-uint32 MEASUREMENT_CAPABILITY_TEMPERATURE = 4
-uint32 MEASUREMENT_CAPABILITY_STATE_OF_HEALTH = 8
-uint32 MEASUREMENT_CAPABILITY_CYCLE_COUNT = 16
-uint32 MEASUREMENT_CAPABILITY_CELL_VOLTAGES = 32
-uint32 MEASUREMENT_CAPABILITY_CELL_RESISTANCES = 64
-# uint32 measurement_capabilities   # type mask of capabilities: voltage, cell voltages, temperatures, etc.
-
-# Same here. What usefulness does knowing the estimation method provide? How would this information be used?
-# uint32 estimation_capabilities    # estimator type ie columb counter, columb ++ impedance estimator, EKF 2 state, UKF, SOH estimated, others
-
 uint8[<=50] name                    # Formatted as manufacturer_product, 0 terminated
 uint8[<=16] serial_number           # Serial number in ASCII characters, 0 terminated
 uint8[<=11] manufacture_date        # Manufacture date (DD/MM/YYYY) in ASCII characters, 0 terminated
