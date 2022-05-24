@@ -1,8 +1,7 @@
 #
-# Battery cell voltages & resistances
+# Battery cell voltages
 # Rate: set by parameter on smart battery (default off)
 #
 
-uint8 index 					  # Cell block index, index 0 corresponds to cells 0 - 23, index 1 cells 24 - 48, etc
-float16[<=24] voltages            # [mV]
-float16[<=24] resistances         # [m Ohm] cell resistances: NAN first element: field not provided
+uint8 index                       # Cell block index, index 0 corresponds to cells 0 - 23, index 1 cells 24 - 48, etc
+float16[<=24] voltages            # [Volt]
