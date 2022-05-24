@@ -12,17 +12,17 @@
 uint8[<=50] name                    # Formatted as manufacturer_product, 0 terminated
 uint8[<=16] serial_number           # Serial number in ASCII characters, 0 terminated
 uint8[<=11] manufacture_date        # Manufacture date (DD/MM/YYYY) in ASCII characters, 0 terminated
-uint32 design_capacity              # [mAh] Fully Charged Design Capacity. UINT32_MAX: field not provided.
+uint32 design_capacity              # [mAh] Fully Charged Design Capacity. 0: field not provided.
 
-uint8 cells_in_series               # Number of battery cell in series. UINT8_MAX: field not provided.
+uint8 cells_in_series               # Number of battery cell in series. 0: field not provided.
 
 # Nominal voltage of the battery pack
 # the nominal Voltage can be used for conversion between W-h and A-h
 # if the value of this field is 0, the conversion should be omitted.
 float16 nominal_voltage             # [Volt]
 
-float16 discharge_minimum_voltage   # [Volt] Minimum per-cell voltage when discharging. UINT16_MAX: field not provided.
-float16 charging_minimum_voltage    # [Volt] Minimum per-cell voltage when charging. UINT16_MAX: field not provided.
+float16 discharge_minimum_voltage   # [Volt] Minimum per-cell voltage when discharging. 0: field not provided.
+float16 charging_minimum_voltage    # [Volt] Minimum per-cell voltage when charging. 0: field not provided.
 float16 charging_maximum_voltage    # [Volt] Maximum per-cell voltage when charged. 0: field not provided.
 uint32 charging_maximum_current     # [mA] Maximum pack continuous charge current. 0: field not provided.
 uint32 discharge_maximum_current       # [mA] Maximum pack continuous discharge current. 0: field not provided.
