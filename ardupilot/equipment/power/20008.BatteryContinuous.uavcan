@@ -2,7 +2,9 @@
 # Battery data to be sent continuously
 #
 
-float16 temperature             # [C]      : Pack mounted thermistor (preferably installed between cells), NAN: field not provided
+float16 temperature_cells       # [C]      : Pack mounted thermistor (preferably installed between cells), NAN: field not provided
+float16 temperature_pcb         # [C]      : Battery PCB temperature (likely output FET(s) or current sense resistor), NAN: field not provided
+float16 temperature_other       # [C]      : Application dependent, NAN: field not provided
 float32 current                 # [Ampere] : Positive: defined as a discharge current. Negative: defined as a charging current, NAN: field not provided
 float16 voltage                 # [Volt]
 uint32 capacity_consumed        # [mAh]    : Current consumed since boot.
