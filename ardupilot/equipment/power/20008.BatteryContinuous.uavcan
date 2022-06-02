@@ -7,10 +7,10 @@ float16 temperature_pcb         # [C]      : Battery PCB temperature (likely out
 float16 temperature_other       # [C]      : Application dependent, NAN: field not provided
 float32 current                 # [Ampere] : Positive: defined as a discharge current. Negative: defined as a charging current, NAN: field not provided
 float16 voltage                 # [Volt]
-uint32 capacity_consumed        # [mAh]    : Current consumed since boot.
-uint32 capacity_remaining       # [mAh]
-uint32 full_charge_capacity     # [mAh]    : Predicted battery capacity when fully charged (accounting for battery degradation)
-uint32 status_flags
+uint32 capacity_consumed        # [mAh]    : This is either the consumption since power-on or since the battery was full, depending on the value of STATUS_FLAG_CAPACITY_RELATIVE_TO_FULL, UINT32_MAX: field not provided
+uint32 capacity_remaining       # [mAh]    : If STATUS_FLAG_CAPACITY_RELATIVE_TO_FULL is unset, this value is based on the assumption the battery was full when the system was powered, UINT32_MAX: field not provided
+uint32 full_charge_capacity     # [mAh]    : Predicted battery capacity when fully charged (accounting for battery degradation), UINT32_MAX: field not provided
+uint32 status_flags             #          : Fault, health, readiness, and other status indications
 
 uint32 STATUS_FLAG_READY_TO_USE                             = 1
 uint32 STATUS_FLAG_CHARGING                                 = 2
@@ -30,3 +30,4 @@ uint32 STATUS_FLAG_FAULT_SHORT_CIRCUIT                      = 16384
 uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_VOLTAGE               = 32768
 uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_FIRMWARE              = 65536
 uint32 STATUS_FLAG_FAULT_INCOMPATIBLE_CELLS_CONFIGURATION   = 131072
+uint32 STATUS_FLAG_CAPACITY_RELATIVE_TO_FULL                = 262144
