@@ -1,0 +1,8 @@
+#
+# DroneCAN version of MAVLink OPEN_DRONE_ID_SYSTEM_UPDATE
+# see MAVLink XML for detailed description
+#
+int32 operator_latitude # degE7
+int32 operator_longitude # degE7
+float32 operator_altitude_geo # meters, use -1000 if unknown, WGS84
+uint32 timestamp # Unix seconds since 00:00:00 01/01/2019
