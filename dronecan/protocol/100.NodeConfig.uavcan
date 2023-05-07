@@ -1,0 +1,60 @@
+#
+# Node configuration. This message can be sent to a node to set
+# configuration items that are common to all nodes. It is also used as a response
+# to a request for these currently-set values. It provides a simple
+# implementation to get or set these items.
+#
+# To set this data, send a message type `dronecan.protocol.100.NodeConfig`, with the payload below.
+#
+# To get this data, send a message of type `dronecan.protocol.101.GetNodeConfig`, with no payload. Response to a get request will be type 100.
+# 
+# Payload size: 5 bytes. Response payload size, if a set request: 1 byte.
+#
+
+uint8 GET_RESPONSE = 0
+uint8 SET = 1
+
+#
+# Use `GET_RESPONSE` if responding to a request. Use `SET` if directing a change
+# of config.
+#
+uint8 get_or_set 
+
+#
+# Node id, as defined in the Specification, section 5. Must be between 1 and 127.
+#
+uint8 node_id  
+
+uint8 FD_MODE = 1
+uint8 LEGACY_MODE = 0
+
+#
+# Determines if the node operates in FD mode, ie capable of 64-byte frames,
+# or legacy mode, capable of 8-byte frames. Set to 1 for FD mode, or 0 for
+# legacy mode.
+#
+uint8 fd_mode
+
+#
+# CAN bitrate to use, in kilobits per seconds. The node is expected to immediately
+# switch to this, including in its acknowledgement to this message. The maximum value
+# is 8000, due to hardware limitations of CAN FD.
+#
+uint16 can_bitrate
+
+
+---
+
+
+#
+# Response, if a set request.
+#
+
+uint8 SUCCESS = 0
+uint8 ERROR = 1
+
+#
+# A result of 1 indicates an error setting the config, while a response of 0 inciates
+# the config was set successfully.
+#
+uint8 result

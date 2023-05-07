@@ -1,0 +1,5 @@
+#
+# Get node configuration, using data type 101. No payload. The expected response format is 
+# `dronecan.protocol.100.NodeConfig`, with `get_or_set` = 0. See that message type
+# for details.
+#
