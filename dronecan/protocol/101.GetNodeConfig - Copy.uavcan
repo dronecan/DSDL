@@ -3,5 +3,3 @@
 # `dronecan.protocol.100.NodeConfig`, with `get_or_set` = 0. See that message type
 # for details.
 #
-# Payload size: 0 bytes.
-#

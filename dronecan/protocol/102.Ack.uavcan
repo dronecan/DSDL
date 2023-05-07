@@ -1,0 +1,18 @@
+#
+# Acknowledgement to a message with success status, for example to set configuration
+# or parameter.
+#
+# Payload size: 1 byte.
+
+
+#
+# Response, if a set request.
+#
+uint8 SUCCESS = 0
+uint8 ERROR = 1
+
+#
+# A result of 1 indicates an error setting the config, while a response of 0 inciates
+# the config was set successfully.
+#
+uint8 result

@@ -4,12 +4,16 @@
 # to a request for these currently-set values. It provides a simple
 # implementation to get or set these items.
 #
-# To set this data, send a message type `dronecan.protocol.100.NodeConfig`, with the payload below.
+# To set this data, send a message type `dronecan.protocol.100.NodeConfig`, with the payload
+# below.
 #
-# To get this data, send a message of type `dronecan.protocol.101.GetNodeConfig`, with no payload. Response to a get request will be type 100.
+# To get this data, send a message of type `dronecan.protocol.101.GetNodeConfig`, with no 
+# payload. Response to a set request will be of type `dronecan.protocol.102.Ack`, indicating
+# success or failure.
 # 
-# Payload size: 5 bytes. Response payload size, if a set request: 1 byte.
+# Payload size: 5 bytes.
 #
+
 
 uint8 GET_RESPONSE = 0
 uint8 SET = 1
@@ -41,20 +45,3 @@ uint8 fd_mode
 # is 8000, due to hardware limitations of CAN FD.
 #
 uint16 can_bitrate
-
-
----
-
-
-#
-# Response, if a set request.
-#
-
-uint8 SUCCESS = 0
-uint8 ERROR = 1
-
-#
-# A result of 1 indicates an error setting the config, while a response of 0 inciates
-# the config was set successfully.
-#
-uint8 result
