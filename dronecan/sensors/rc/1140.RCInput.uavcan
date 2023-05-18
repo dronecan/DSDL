@@ -1,0 +1,7 @@
+uint8 STATUS_RSSI_VALID = 1 # RSSI field is valid
+uint8 STATUS_FAILSAFE = 2 # receiver has lost contact with transmitter
+
+uint16 status      # bitmask of status bits, enumerated above with STATUS_*
+
+uint8 quality      # scaled, 0 is no signal, 255 is "full" signal
+uint12[<=32] rcin  # RC channel values between 0 and 4095
