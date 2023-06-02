@@ -16,3 +16,12 @@ jobs:
         shell: bash
         run: |
           tests/test_regression.sh
+
+      - name: Archive generated headers
+        uses: actions/upload-artifact@v3
+        with:
+          name: dsdl_generated
+          path: |
+           dsdl_generated/include
+           dsdl_generated/src
+          retention-days: 90
