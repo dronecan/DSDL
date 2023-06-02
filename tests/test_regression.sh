@@ -7,10 +7,10 @@ set -x
 # test compiler on linux
 python3 -m pip install -U empy pexpect dronecan
 
-cd ..
-
-git clone https://github.com/DroneCAN/dronecan_dsdlc
-git clone https://github.com/DroneCAN/libcanard
+pushd ..
+[ -d dronecan_dsdlc ] || git clone https://github.com/DroneCAN/dronecan_dsdlc
+[ -d libcanard ] || git clone https://github.com/DroneCAN/libcanard
+popd
 
 echo "Testing generation with regression testing"
-python3 dronecan_dsdlc/dronecan_dsdlc.py --output dsdl_generated DSDL/dronecan DSDL/uavcan DSDL/com DSDL/ardupilot --run-test
+python3 ../dronecan_dsdlc/dronecan_dsdlc.py --output dsdl_generated dronecan uavcan com ardupilot --run-test
