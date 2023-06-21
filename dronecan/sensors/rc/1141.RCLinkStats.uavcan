@@ -8,15 +8,12 @@
 
 uint8 STATUS_RSSI_VALID = 1 # RSSI field is valid
 
-# Uplink - received signal strength (RSSI) for antennas 1 and 2 respectively. Ranges from 
-# -255 to 0. (An integer value of 100 means RSSI is -100dBm)
+# Uplink - received signal strength, in decibel-milliwatts (RSSI dBm) for antennas 1 and 2 respectively. 
+Ranges from # -255 to 0. (An integer value of 100 means RSSI is -100dBm)
 uint8 uplink_rssi_1
 uint8 uplink_rssi_2
 
-# Link quality, on a scale from 0 to 255 - its precise definition may change basd on the link 
-# protocol used. Example: percentage of recent packets received correctly. With this example, 
-# 0 means no valid packets received recently; 255 means 100% of packets received recently are # valid.
-uint8 uplink_link_quality
+# Link quality, on a scale from 1 to 255. Is a proxy for packet loss. 0 means data is unavailable. 1 and 255 are mapped to 0% and 100% of packets received.
 
 # Signal-to-noise ratio.
 int8 uplink_snr
