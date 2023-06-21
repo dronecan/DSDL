@@ -9,11 +9,12 @@
 uint8 STATUS_RSSI_VALID = 1 # RSSI field is valid
 
 # Uplink - received signal strength, in decibel-milliwatts (RSSI dBm) for antennas 1 and 2 respectively. 
-Ranges from # -255 to 0. (An integer value of 100 means RSSI is -100dBm)
+# Ranges from # -255 to 0. (An integer value of 100 means RSSI is -100dBm)
 uint8 uplink_rssi_1
 uint8 uplink_rssi_2
 
 # Link quality, on a scale from 1 to 255. Is a proxy for packet loss. 0 means data is unavailable. 1 and 255 are mapped to 0% and 100% of packets received.
+uint8 uplink_link_quality
 
 # Signal-to-noise ratio.
 int8 uplink_snr
@@ -29,7 +30,8 @@ uint8 rf_mode
 # power level.
 uint8 uplink_tx_power
 
-# Statistics for downlink data, ie telemetry.
+# Statistics for downlink data, ie telemetry. See their respective `uplink` fields for
+# descriptions.
 uint8 downlink_rssi
 uint8 downlink_link_quality
 int8 downlink_snr
