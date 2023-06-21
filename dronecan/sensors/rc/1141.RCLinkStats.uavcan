@@ -20,7 +20,7 @@ uint8 uplink_link_quality
 int8 uplink_snr
 
 # Example: 1 for antenna 1, and 2 for antenna 2. Not applicable for single-antenna links.
-uint8 active_antenna
+uint8 uplink_active_antenna
 
 # This is an implementation-specific enum. May represent the OTA protocol used,
 # and transmission rate.
@@ -35,3 +35,4 @@ uint8 uplink_tx_power
 uint8 downlink_rssi
 uint8 downlink_link_quality
 int8 downlink_snr
+uint8 downlink_active_antenna
