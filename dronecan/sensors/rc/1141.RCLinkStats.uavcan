@@ -29,7 +29,8 @@ uint8 uplink_tx_power
 
 # Statistics for downlink data, ie telemetry. See their respective `uplink` fields for
 # descriptions.
-uint8 downlink_rssi
+uint8 downlink_rssi_1
+uint8 downlink_rssi_2
 uint8 downlink_link_quality
 int8 downlink_snr
 
