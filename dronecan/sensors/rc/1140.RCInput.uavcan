@@ -1,4 +1,4 @@
-uint8 STATUS_RSSI_VALID = 1 # RSSI field is valid
+uint8 STATUS_QUALITY_VALID = 1 # quality field is valid
 uint8 STATUS_FAILSAFE = 2 # receiver has lost contact with transmitter
 
 uint16 status      # bitmask of status bits, enumerated above with STATUS_*
