@@ -7,3 +7,7 @@ uint8 channel_id
 uint32 baud
 
 uint24 options
+
+uint16 tx_buffer
+
+uint16 rx_buffer
