@@ -8,6 +8,6 @@ uint32 baud
 
 uint24 options
 
-uint16 tx_buffer
+uint16 tx_bufsize
 
-uint16 rx_buffer
+uint16 rx_bufsize
