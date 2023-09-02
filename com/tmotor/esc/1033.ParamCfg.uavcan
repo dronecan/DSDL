@@ -1,5 +1,5 @@
 #
-# 1033.ParamCfg.uavcan参数设置数据包
+# 1033.ParamCfg.uavcan parameter setting
 #
 
 OVERRIDE_SIGNATURE 0x948F5E0B33E0EDEE
