@@ -3,8 +3,8 @@
 # Unknown fields should be set to NAN.
 #
 
-uint5 esc_index             # zero is first ESC. This should match the index into the cmd[] array in RawCommand
+uint5 fan_index             # zero is first ESC. This should match the index into the cmd[] array in RawCommand
 int18 rpm                   # Negative value indicates reverse rotation
-uint7 power_rating_pct      # Instant demand factor in percent (percent of maximum power); range 0% to 127%.
+uint7 power_pct      # Instant demand factor in percent (percent of maximum power); range 0% to 127%.
 
 
