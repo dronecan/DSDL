@@ -10,4 +10,4 @@ uint7 output_pct              # Output command from ESC to motor, in percent. Ra
 int9 motor_temperature_degC   # Temperature of connected motor, in Celsius. Range is -256 to +255 C.
 uint9 motor_angle             # Measured angle of connected angle sensor, in degrees. Range is 0 to 360. 
 
-uint32 status_flags           # Manufacturer-specific status flags currently active.
+uint24 status_flags           # Manufacturer-specific status flags currently active.
