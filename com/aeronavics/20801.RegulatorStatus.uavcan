@@ -1,0 +1,22 @@
+#
+# Generic power regulator info.
+#
+
+uint16 regulator_id
+
+float16 voltage
+float16 current
+float16 temperature                  # in kelvin
+
+uint8 ERROR_FLAG_OVERVOLTAGE  = 1
+uint8 ERROR_FLAG_UNDERVOLTAGE = 2
+uint8 ERROR_FLAG_OVERCURRENT  = 4
+uint8 ERROR_FLAG_UNDERCURRENT = 8
+uint8 ERROR_FLAG_OVERHEATING = 16
+uint8 ERROR_FLAG_OVERCOOLING = 32
+uint8 error_flags
+
+
+
+
+
