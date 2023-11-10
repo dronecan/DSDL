@@ -1,0 +1,14 @@
+#
+# Proximity sensor message sending list of detected obstacles in 3D space around drone.
+#
+
+#Sensor ID is in order of X4 motors
+uint3 PROXIMITY_SENSOR_ID_FRONT_RIGHT = 0
+uint3 PROXIMITY_SENSOR_ID_REAR_LEFT   = 1
+uint3 PROXIMITY_SENSOR_ID_FRONT_LEFT  = 2
+uint3 PROXIMITY_SENSOR_ID_REAR_RIGHT  = 3
+    
+
+uint3 sensor_id                      # Sensor ID
+
+OBSTACLE[<32] obstacles            # List of obstacles detected by the sensor
