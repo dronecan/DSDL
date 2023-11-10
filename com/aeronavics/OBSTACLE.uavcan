@@ -1,0 +1,7 @@
+#
+# Nested type.
+# Obstacle position in drones coordinate frame
+
+float16 yaw                          # Degrees in body frame
+float16 pitch                        # Degrees in body frame
+float16 distance                     # Meters
