@@ -1,14 +1,49 @@
 #
-# Fuelcell Status
+# Fuelcell Status Reports
 #
 
-uint7 tank_pressure        # percentage
-uint8 regulated_pressure   # *100
 
-uint10 battery_voltage     # decivolt *10
+#
+# Cylinder Pressure in Percentage of Maximum: 0-100 percent
+# (7-bit) - precent
+#
+uint7 tank_pressure
+
+#
+# Regulator Output Pressure - Fuel-cell entry pressure: 0.00 to 2.55 Bar
+# (8-bit) - centiBar
+# float pressure = (regulated_pressure / 100.0) Bar
+uint8 regulated_pressure
+
+#
+# Companion Battery Voltage: 0.0 Volt to 102.3 Volt
+# (10-bit) - deciVolt
+#
+uint10 battery_voltage
+
+#
+# Output Power: 0 - 16383 Watt
+# (14-bit) - Watt
+#
 uint14 output_power
+
+#
+# SPM Power: 0 - 8191 Watt
+# (13-bit) - Watt
+#
 uint13 spm_power
+
+#
+# Companion Battery Power: -32768 to 32767 Watt
+# (signed 16-bit) - Watt
+# Negative = discharge, positive = charge
+#
 int16 battery_power
+
+#
+# State & Error codes
+# Manufacturer Dependent State and Error Codes
+#
 uint4 psu_state
 uint8 error_code
 uint8 sub_code
