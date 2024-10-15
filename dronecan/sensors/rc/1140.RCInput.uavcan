@@ -1,9 +1,20 @@
+#
+# RC channels and basic link statistics
+#
+
 uint8 STATUS_QUALITY_VALID = 1 # quality field is valid
 uint8 STATUS_FAILSAFE = 2 # receiver has lost contact with transmitter
+uint8 STATUS_QUALITY_TYPE = 28 # mask of 3 bits (4+8+16) to indicate the type of data carried in the quality field, see QUALITY_TYPE enum
+
+uint8 QUALITY_TYPE_RSSI = 0 # quality field represents RSSI in scaled units, 0 is no signal, 255 is "full" signal
+uint8 QUALITY_TYPE_LQ_ACTIVE_ANTENNA = 4 # quality field represents LQ in percent in bits 1-7 (0 is no signal, 100 is 100% link quality) and active antenna in bit 8
+uint8 QUALITY_TYPE_RSSI_DBM = 8 # quality field represents RSSI in inverted dBm, 0 is no signal, 1 = -1 dBm, 255 = -255 dBm
+uint8 QUALITY_TYPE_SNR = 12 # quality field represents SNR in device dependent units, shifted by 128
+uint8 QUALITY_TYPE_TX_POWER = 16 # quality field represents uplink power in units of 5 mW
 
 uint16 status      # bitmask of status bits, enumerated above with STATUS_*
 
-uint8 quality      # scaled, 0 is no signal, 255 is "full" signal
+uint8 quality      # see descriptions for status bits STATUS_QUALITY_VALID, STATUS_QUALITY_LQ, STATUS_QUALITY_SNR
 uint4 id           # ID of this RC input device
 
-uint12[<=32] rcin  # RC channel values between 0 and 4095
+uint12[<=32] rcin  # RC channel values between 0 and 4095, values are in PWM microseconds, 1500 represents the mid position
