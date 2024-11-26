@@ -1,0 +1,11 @@
+OVERRIDE_SIGNATURE 0x4df8b5792b8e676a
+
+uint8 IDCMD_SET_NEW = 0
+uint8 IDCMD_RST     = 1
+uint8 IDCMD_GET     = 2
+uint8 IDCMD_UP      = 3
+uint8 IdCmd
+
+uint8 NodeId
+
+uint8 ThrotId
