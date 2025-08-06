@@ -1,0 +1,7 @@
+uint8 request    
+---
+uint8[<=12] hardware_id         
+uint8[<=4] firmware_version    
+uint8[<=4] hw_version          
+uint8[<=4] protocol_version     
+uint8[<=24] reserved           

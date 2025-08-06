@@ -1,0 +1,4 @@
+uint8 new_can_id       
+uint8 new_throttle_id
+---
+uint8 result      

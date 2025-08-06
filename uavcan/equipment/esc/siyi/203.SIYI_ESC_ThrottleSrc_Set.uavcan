@@ -1,0 +1,6 @@
+uint8 THROTTLE_SRC_PWM = 0   
+uint8 THROTTLE_SRC_CAN = 1   
+
+uint8 throttle_src       #source selection (THROTTLE_SRC_* enum)
+---
+uint8 result  

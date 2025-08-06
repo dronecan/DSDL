@@ -1,0 +1,22 @@
+uint8 MSG_ID_ALL = 0       # Control all message types
+uint8 MSG_ID_1 = 1         # Corresponds to original msg1
+uint8 MSG_ID_2 = 2         # Corresponds to original msg2
+uint8 FREQ_DISABLE = 0     # Disable reporting
+uint8 FREQ_1HZ = 1         # 1Hz 
+uint8 FREQ_10HZ = 2        # 10Hz 
+uint8 FREQ_20HZ = 3        # 20Hz
+uint8 FREQ_50HZ = 4        # 50Hz
+uint8 FREQ_100HZ = 5       # 100Hz
+uint8 FREQ_200HZ = 6       # 200Hz
+uint8 FREQ_250HZ = 7       # 250Hz 
+uint8 FREQ_500HZ = 8       # 500Hz 
+uint8 FREQ_MAX = 9         # Upper limit for validation
+
+
+uint8 msg_id      # Target message ID (MSG_ID_* enum)
+uint8 frequency   # Reporting frequency (FREQ_* enum)
+---
+uint8 RESPONSE_OK = 0x00      
+uint8 RESPONSE_ERROR = 0x01     
+
+uint8 result      # Operation result (RESPONSE_* enum values)
