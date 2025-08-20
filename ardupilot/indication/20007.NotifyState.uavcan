@@ -24,6 +24,9 @@ uint8 VEHICLE_STATE_IS_LANDING      = 22
 uint8 VEHICLE_STATE_IS_TAKING_OFF   = 23
 
 
+# beware that the auxiliary data indicated by
+# ARDUPILOT_INDICATION_NOTIFYSTATE_VEHICLE_YAW_EARTH_CENTIDEGREES
+# is strange; it's number of degrees *counter-clockwise* from North:
 uint8 VEHICLE_YAW_EARTH_CENTIDEGREES = 0
 
 # set the type of aux data to be sent
