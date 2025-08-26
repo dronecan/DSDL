@@ -1,0 +1,18 @@
+uint8 ESC_FAULT_TYPE_UNDER_VOLTAGE     = 0
+uint8 ESC_FAULT_TYPE_OVER_VOLTAGE      = 1
+uint8 ESC_FAULT_TYPE_OPAMP_ABNORMAL    = 2
+uint8 ESC_FAULT_TYPE_MOS_SHORT         = 3
+uint8 ESC_FAULT_TYPE_MOTOR_PHASE_LOSS  = 4
+uint8 ESC_FAULT_TYPE_THROTTLE_LOSS     = 5
+uint8 ESC_FAULT_TYPE_THROTTLE_NOT_ZERO = 6
+uint8 ESC_FAULT_TYPE_LOCK_ROTOR        = 7
+uint8 ESC_FAULT_TYPE_OVER_TEMP_MOS     = 8
+uint8 ESC_FAULT_TYPE_OVER_TEMP_CAP     = 9
+uint8 ESC_FAULT_TYPE_OVER_CURRENT      = 10
+
+uint8 fault_type
+---  
+uint32 file_size                    
+uint32 recent_poweron_times   
+uint16 block_size                     
+

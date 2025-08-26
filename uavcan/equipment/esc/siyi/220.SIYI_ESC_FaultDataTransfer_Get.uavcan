@@ -1,0 +1,6 @@
+uint16 block_idx
+---  
+uint8[<=128]  fault
+uint16 block_idx      
+
+

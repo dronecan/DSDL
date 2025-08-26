@@ -1,0 +1,6 @@
+uint8 THROTTLE_RAW = 0  
+uint8 THROTTLE_PERCENT = 1 
+uint8 THROTTLE_PWM = 2       
+
+uint8 control_mode      # Control mode (THROTTLE_* enum)
+uint14[<=24] throttle_data  

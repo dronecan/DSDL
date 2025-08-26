@@ -1,0 +1,7 @@
+uint16 motor_speed     
+uint16 pulse_width      
+uint16 bus_voltage  
+uint16 bus_current   
+uint8 esc_temp          
+uint8 cap_temp      
+

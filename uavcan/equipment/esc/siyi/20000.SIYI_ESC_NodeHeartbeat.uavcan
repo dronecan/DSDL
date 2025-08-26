@@ -1,0 +1,21 @@
+uint8 HEALTH_OK = 0
+uint8 HEALTH_WARNING = 1  
+uint8 HEALTH_ERROR = 2     
+
+uint8 MODE_INIT = 0      
+uint8 MODE_SELFCHECKING = 1  
+uint8 MODE_STANDBY = 2      
+uint8 MODE_RUNNING = 3     
+uint8 MODE_FAULT = 4       
+
+uint8 SIYI_ESC_D6 = 0
+uint8 SIYI_ESC_E3 = 1
+uint8 SIYI_ESC_E6 = 2
+uint8 SIYI_ESC_E8 = 3
+
+uint32 timestamp       
+uint8 health              # Health status (HEALTH_* constants)
+uint8 mode                # Operation mode (MODE_* constants)
+uint8 esc_id              
+uint8 esc_model           # Product model (SIYI_ESC_* constants)
+uint8[<=24] vendor_info

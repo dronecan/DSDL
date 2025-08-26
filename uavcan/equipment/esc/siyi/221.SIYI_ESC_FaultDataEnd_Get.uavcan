@@ -1,0 +1,8 @@
+uint8 ESC_FAULT_DATA_TRANSFER_OK = 0
+uint8 ESC_FAULT_DATA_TRANSFER_ERROR = 1
+
+uint32 total_transfer_size 
+uint8 transfer_status
+---  
+uint8 respond
+

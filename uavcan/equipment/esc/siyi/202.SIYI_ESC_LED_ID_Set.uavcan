@@ -1,0 +1,9 @@
+uint8 LED_COLOR_RED = 0      # Red
+uint8 LED_COLOR_GREEN = 1    # Green
+uint8 LED_COLOR_BLUE = 2     # Blue
+uint8 LED_COLOR_OFF = 3      # LED Off
+
+uint8 led_color        # Target color (must use LED_COLOR_* enum)
+uint8 brightness      # Brightness level (0-100%, 0=minimum, 100=maximum)
+---
+uint8 result  

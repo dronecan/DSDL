@@ -1,0 +1,4 @@
+uint8 DATA_UPLOAD_OFF = 0 
+uint8 DATA_UPLOAD_ON = 1   
+
+uint8 status 
