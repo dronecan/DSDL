@@ -14,7 +14,7 @@
 #
 float16 temperature             # [Kelvin]
 float16 voltage                 # [Volt]
-float16 current                 # [Ampere]
+float16 current                 # [Ampere]      Positive: defined as a discharge current. Negative: defined as a charging current
 float16 average_power_10sec     # [Watt]        Average power consumption over the last 10 seconds
 float16 remaining_capacity_wh   # [Watt hours]  Will be increasing during charging
 float16 full_charge_capacity_wh # [Watt hours]  Predicted battery capacity when it is fully charged. Falls with aging
