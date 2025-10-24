@@ -1,0 +1,22 @@
+#
+# Contact Status
+#
+
+uint32 uptime_sec
+
+uint8 sensor_id
+
+#
+# Sensor status flags.
+# Notes:
+#  - STATUS_FLAG_OK should be set when the contact sensor is operating normally.
+#  - STATUS_FLAG_ERROR should be set if the contact sensor reports an error.
+#
+uint8 STATUS_FLAG_OK        = 1     # STATUS_FLAG_OK: The contact sensor is operating normally
+uint8 STATUS_FLAG_ERROR     = 2     # STATUS_FLAG_ERROR: The contact sensor has an error
+uint8 status_flag
+
+#
+# Either a binary command (0 - disengage/disconected, 1+ - engage/conected) or bitmask
+#
+uint2 engage # engage or disengage
