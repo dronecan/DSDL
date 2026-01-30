@@ -1,0 +1,215 @@
+#
+# Practical GNSS navigation solution with signal quality metrics.
+#
+# This message provides a complete navigation solution for real-world applications.
+# Unlike Fix2's covariance matrices, Fix3 uses explicit accuracy fields with clear units.
+# Fixed-size structure.
+#
+# Supports: u-blox, Septentrio, STMicro Teseo, and generic NMEA receivers.
+#
+# Design principles:
+#   - Field names use conventional GNSS terminology
+#   - Units specified in comments, not field names (except scaling factors)
+#   - Fixed size, no dynamic arrays
+#
+
+#
+# Network-synchronized timestamp [microseconds]
+# Zero if unavailable.
+#
+uavcan.Timestamp timestamp
+
+#
+# GNSS timestamp from receiver [microseconds]
+# Interpretation depends on time_standard field.
+# Zero if unavailable.
+#
+uint64 gnss_time_usec
+
+#
+# Time standard used for gnss_time_usec.
+# GPS: Microseconds since GPS epoch (1980-01-06 00:00:00)
+# UTC: Microseconds since Unix epoch (1970-01-01 00:00:00)
+# TAI: Microseconds since TAI epoch
+#
+uint3 TIME_STANDARD_GPS             = 0
+uint3 TIME_STANDARD_UTC             = 1
+uint3 TIME_STANDARD_TAI             = 2
+uint3 time_standard
+void5                               # Reserved, align to byte
+
+#
+# Leap seconds for UTC conversion.
+# UTC = GPS_time - num_leap_seconds + 9 (in seconds)
+# Set to 0 if unknown. As of 2024, value is 18.
+#
+uint8 num_leap_seconds
+
+#
+# Position in WGS84 geodetic frame.
+# Scaling by 1e8 provides ~1mm resolution for RTK applications.
+#
+int37 longitude_deg_1e8             # [deg * 1e8]
+int37 latitude_deg_1e8              # [deg * 1e8]
+void6 								# Reserved, align to byte
+int32 altitude_msl                  # Height above mean sea level [mm]
+int32 altitude_ellipsoid            # Height above WGS84 ellipsoid [mm]
+
+#
+# Velocity in NED (North-East-Down) frame [m/s]
+#
+float32 vel_north                   # [m/s]
+float32 vel_east                    # [m/s]
+float32 vel_down                    # [m/s]
+
+#
+# Ground speed (horizontal) [m/s]
+# NaN if unavailable.
+#
+float16 ground_speed                # [m/s]
+
+#
+# Position accuracy (1-sigma standard deviation) [m]
+# These match receiver output directly (e.g., u-blox hAcc/vAcc).
+# Negative value (e.g., -1) indicates unavailable.
+#
+float16 eph                         # Horizontal position accuracy [m]
+float16 epv                         # Vertical position accuracy [m]
+
+#
+# Velocity accuracy (1-sigma) [m/s]
+# Negative value indicates unavailable.
+#
+float16 speed_accuracy              # [m/s]
+
+#
+# Heading from dual-antenna GNSS, moving baseline, or sensor fusion [deg]
+# NaN if unavailable. Check FLAGS_HEADING_VALID.
+# Check FLAGS_HEADING_FUSED to determine if this is pure GNSS or includes
+# IMU/magnetometer fusion (e.g., u-blox F9R).
+#
+float16 heading                     # True heading [deg], [0, 360)
+float16 heading_accuracy            # [deg], 1-sigma
+
+#
+# Course over ground (direction of movement, not where vehicle points) [deg]
+# NaN if unavailable or stationary.
+#
+float16 cog                         # [deg], [0, 360)
+
+#
+# Dilution of precision. NaN if unavailable.
+#
+float16 hdop
+float16 vdop
+float16 pdop
+
+#
+# Fix type - combines fix status and correction mode.
+#
+uint8 FIX_TYPE_NO_FIX               = 0
+uint8 FIX_TYPE_DEAD_RECKONING       = 1
+uint8 FIX_TYPE_2D                   = 2
+uint8 FIX_TYPE_3D                   = 3
+uint8 FIX_TYPE_3D_DGPS              = 4     # DGPS/SBAS corrected
+uint8 FIX_TYPE_3D_RTK_FLOAT         = 5
+uint8 FIX_TYPE_3D_RTK_FIXED         = 6
+uint8 FIX_TYPE_3D_PPP               = 7     # Precise Point Positioning
+uint8 fix_type
+
+#
+# Fix quality/confidence indicator [0-100]
+# Receiver's assessment of fix quality, independent of fix_type.
+# 0 = no confidence / invalid, 100 = full confidence.
+# Receivers without internal quality metrics can derive from fix_type:
+#   NO_FIX=0, 2D=30, 3D=60, DGPS=75, RTK_FLOAT=85, RTK_FIXED=100
+# Receivers with quality metrics (e.g., u-blox pAcc, internal DOP checks)
+# should use their native assessment.
+#
+uint8 fix_quality
+
+#
+# Satellite counts.
+#
+uint8 sats_used                     # Satellites in navigation solution
+uint8 sats_visible                  # Satellites visible/tracked
+
+#
+# Differential correction age [seconds]
+# Time since last valid RTCM/correction message was received.
+# 0 = corrections just received, 0xFFFF = unavailable/not applicable.
+# RTK solutions degrade significantly when age > 30-60 seconds.
+#
+uint16 diff_age
+
+#
+# Signal quality metrics.
+#
+
+# Noise level [dBHz]
+# Higher values indicate more noise/interference. -1 if unavailable.
+# u-blox: from UBX-NAV-STATUS noise field.
+int16 noise
+
+# Automatic gain control value.
+# Receiver-specific scaling. Can indicate antenna or LNA issues.
+uint16 agc
+
+#
+# Jamming state (aligns with MAVLink GPS_JAMMING_STATE).
+#
+uint8 JAMMING_UNKNOWN               = 0
+uint8 JAMMING_OK                    = 1     # No jamming detected
+uint8 JAMMING_WARNING               = 2     # Possible jamming, mitigated
+uint8 JAMMING_CRITICAL              = 3     # Jamming detected
+uint8 jamming_state
+
+# Jamming indicator [0-255]. Higher = more interference.
+# u-blox: jamInd from UBX-NAV-STATUS (0=no jamming, 255=strong).
+uint8 jamming_indicator
+
+#
+# Spoofing state (aligns with MAVLink GPS_SPOOFING_STATE).
+#
+uint8 SPOOFING_UNKNOWN              = 0
+uint8 SPOOFING_OK                   = 1     # No spoofing detected
+uint8 SPOOFING_WARNING              = 2     # Possible spoofing, mitigated
+uint8 SPOOFING_INDICATED            = 3     # Spoofing detected
+uint8 spoofing_state
+
+#
+# Authentication state (aligns with MAVLink GPS_AUTHENTICATION_STATE).
+# For Galileo OSNMA, GPS CHIMERA, etc.
+#
+uint8 AUTH_UNKNOWN                  = 0
+uint8 AUTH_INITIALIZING             = 1
+uint8 AUTH_ERROR                    = 2
+uint8 AUTH_OK                       = 3
+uint8 AUTH_DISABLED                 = 4
+uint8 auth_state
+
+#
+# System error flags (bitmask).
+# Aligns with PX4 SensorGps.msg SYSTEM_ERROR_* flags.
+#
+uint16 SYSTEM_ERROR_INCOMING_CORRECTIONS = 1    # Problem with RTCM/corrections
+uint16 SYSTEM_ERROR_CONFIGURATION        = 2    # Receiver configuration error
+uint16 SYSTEM_ERROR_SOFTWARE             = 4    # Receiver software/firmware error
+uint16 SYSTEM_ERROR_ANTENNA              = 8    # Antenna problem (open/short)
+uint16 SYSTEM_ERROR_EVENT_CONGESTION     = 16   # Too many events
+uint16 SYSTEM_ERROR_CPU_OVERLOAD         = 32   # Receiver CPU overloaded
+uint16 SYSTEM_ERROR_OUTPUT_CONGESTION    = 64   # Output buffer overflow
+uint16 system_errors
+
+#
+# Status flags (bitmask).
+#
+uint8 FLAGS_VEL_NED_VALID           = 1     # NED velocity fields are valid
+uint8 FLAGS_HEADING_VALID           = 2     # Heading field is valid
+uint8 FLAGS_HEADING_FUSED           = 4     # Heading includes IMU/mag fusion (vs pure GNSS)
+uint8 FLAGS_TIME_VALID              = 8     # gnss_time_usec is valid
+uint8 FLAGS_DIFF_CORRECTIONS        = 16    # Differential corrections applied
+uint8 FLAGS_RECEIVER_HEALTHY        = 32    # Receiver self-test passed, hardware OK
+uint8 FLAGS_LOGGING                 = 64    # Receiver is logging data internally
+uint8 FLAGS_ARMABLE                 = 128   # Configured and ready for flight control use
+uint8 flags
