@@ -24,7 +24,7 @@ uint16 cycle_count
 uint16 over_discharge_count
 
 # Max instantaneous current draw since last message
-float16 max_current                 # [Ampere]
+float16 max_current                 # [Ampere] Positive: defined as a discharge current. Negative: defined as a charging current
 
 # Nominal voltage of the battery pack
 # the nominal Voltage can be used for conversion between Wh and Ah
