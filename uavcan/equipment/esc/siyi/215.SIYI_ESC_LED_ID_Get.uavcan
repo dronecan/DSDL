@@ -1,0 +1,4 @@
+uint8 request    
+---
+uint8 current_color     
+uint8 current_brightness 

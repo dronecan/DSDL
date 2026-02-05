@@ -1,0 +1,20 @@
+uint8 THROTTLE_SRC_RC = 0   # RC receiver input
+uint8 THROTTLE_SRC_PWM = 1  # Direct PWM input
+uint8 THROTTLE_SRC_CAN = 2  # CAN bus command
+
+uint16 ESC_STATUS_FAULT_VOLTAGE_UNDER = 0x0001      
+uint16 ESC_STATUS_FAULT_VOLTAGE_OVER = 0x0002          
+uint16 ESC_STATUS_FAULT_OPAMP_ABNORMAL = 0x0004    
+uint16 ESC_STATUS_FAULT_MOS_SHORT = 0x0008                  
+uint16 ESC_STATUS_FAULT_MOTOR_PHASE_LOSS = 0x0010    
+uint16 ESC_STATUS_FAULT_THROTTLE_LOSS    = 0x0020          
+uint16 ESC_STATUS_FAULT_THROTTLE_NOT_ZERO = 0x0040    
+uint16 ESC_STATUS_FAULT_LOCK_ROTOR       = 0x0080           
+uint16 ESC_STATUS_FAULT_OVER_TEMP_ESC    = 0x0100      
+uint16 ESC_STATUS_FAULT_OVER_TEMP_CAP    = 0x0200      
+uint16 ESC_STATUS_FAULT_POWER_SATIATE    = 0x0400         
+uint16 ESC_STATUS_FAULT_OVER_CURRENT     = 0x0800       
+
+uint8 throttle_src        # Throttle source (THROTTLE_SRC_* constants)
+uint16 esc_status         # ESC status (bitmask,ESC_STATUS_* constants)
+uint32 motor_running_time 
