@@ -1,0 +1,109 @@
+#
+# GNSS signal quality and integrity metrics.
+#
+# Supplementary message providing signal quality, interference detection,
+# and correction status not carried by Fix2 or Auxiliary.
+# Publish alongside Fix2 at the same or lower rate.
+#
+# Supports: u-blox (MON-RF, NAV-PVT, NAV-STATUS, SEC-SIG),
+#           Septentrio, and other receivers with quality reporting.
+#
+
+#
+# Noise level as measured by the GNSS receiver.
+# Receiver-specific units. u-blox: noisePerMS from UBX-MON-RF.
+# -1 if unavailable.
+#
+int16 noise
+
+#
+# Automatic gain control monitor.
+# u-blox: agcCnt from UBX-MON-RF (0-8191, percentage of max gain).
+# 0xFFFF if unavailable.
+#
+uint16 agc
+
+#
+# Jamming/interference state (aligns with MAVLink GPS_JAMMING_STATE).
+#
+uint8 JAMMING_UNKNOWN    = 0
+uint8 JAMMING_OK         = 1     # No significant jamming
+uint8 JAMMING_WARNING    = 2     # Interference visible, fix OK
+uint8 JAMMING_CRITICAL   = 3     # Interference visible, fix degraded/lost
+uint8 jamming_state
+
+#
+# Jamming indicator [0-255]. Higher = more interference.
+# u-blox: jamInd from UBX-MON-RF or cwSuppression.
+#
+uint8 jamming_indicator
+
+#
+# Spoofing detection state (aligns with MAVLink GPS_SPOOFING_STATE).
+#
+uint8 SPOOFING_UNKNOWN   = 0
+uint8 SPOOFING_OK        = 1
+uint8 SPOOFING_WARNING   = 2     # Possible spoofing, mitigated
+uint8 SPOOFING_INDICATED = 3
+uint8 spoofing_state
+
+#
+# Signal authentication state (Galileo OSNMA, GPS CHIMERA, etc.)
+# Aligns with MAVLink GPS_AUTHENTICATION_STATE.
+#
+uint8 AUTH_UNKNOWN       = 0
+uint8 AUTH_INITIALIZING  = 1
+uint8 AUTH_ERROR         = 2
+uint8 AUTH_OK            = 3
+uint8 AUTH_DISABLED      = 4
+uint8 auth_state
+
+#
+# Differential correction age [seconds].
+# Time since last valid correction was applied.
+# 0 = corrections just received.
+# 0xFFFF = unavailable or not applicable.
+# u-blox: derived from UBX-NAV-PVT flags3.lastCorrectionAge
+# (convert binned value to representative seconds).
+#
+uint16 diff_age
+
+#
+# Antenna supervisor state.
+#
+uint8 ANTENNA_STATUS_UNKNOWN = 0
+uint8 ANTENNA_STATUS_INIT    = 1
+uint8 ANTENNA_STATUS_OK      = 2
+uint8 ANTENNA_STATUS_SHORT   = 3
+uint8 ANTENNA_STATUS_OPEN    = 4
+uint8 antenna_status
+
+#
+# Antenna power status.
+#
+uint8 ANTENNA_POWER_UNKNOWN  = 0
+uint8 ANTENNA_POWER_OFF      = 1
+uint8 ANTENNA_POWER_ON       = 2
+uint8 antenna_power
+
+#
+# Fix quality/confidence indicator [0-100].
+# Receiver's assessment of fix quality, independent of fix_type.
+# 0 = no confidence / invalid, 100 = full confidence.
+# Receivers without internal quality metrics can derive from fix_type:
+#   NO_FIX=0, 2D=30, 3D=60, DGPS=75, RTK_FLOAT=85, RTK_FIXED=100
+#
+uint8 fix_quality
+
+#
+# System error flags (bitmask).
+# Aligns with PX4 SensorGps.msg SYSTEM_ERROR_* flags.
+#
+uint16 SYSTEM_ERROR_INCOMING_CORRECTIONS = 1
+uint16 SYSTEM_ERROR_CONFIGURATION        = 2
+uint16 SYSTEM_ERROR_SOFTWARE             = 4
+uint16 SYSTEM_ERROR_ANTENNA              = 8
+uint16 SYSTEM_ERROR_EVENT_CONGESTION     = 16
+uint16 SYSTEM_ERROR_CPU_OVERLOAD         = 32
+uint16 SYSTEM_ERROR_OUTPUT_CONGESTION    = 64
+uint16 system_errors
