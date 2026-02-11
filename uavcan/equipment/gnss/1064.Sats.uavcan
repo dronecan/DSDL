@@ -1,0 +1,27 @@
+#
+# GNSS satellite information.
+# Individual satellite tracking and signal quality data.
+#
+
+#
+# Global network-synchronized time, if available, otherwise zero.
+#
+uavcan.Timestamp timestamp
+
+#
+# Satellite identification
+#
+uint8 svid                         # Space vehicle ID [1..255]
+uint8 prn                          # Satellite PRN code assignment
+
+#
+# Satellite usage and tracking status
+#
+bool used                          # Satellite used for navigation (0: not used, 1: used)
+
+#
+# Satellite geometry and signal quality
+#
+uint8 elevation                    # Elevation angle (0: right on top of receiver, 90: on horizon)
+uint8 azimuth                      # Direction of satellite (0: 0 deg, 255: 360 deg)
+uint8 snr                          # Signal to noise ratio C/N0, range 0..99, zero when not tracking
