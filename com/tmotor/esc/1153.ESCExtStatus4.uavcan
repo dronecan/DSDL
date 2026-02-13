@@ -1,0 +1,13 @@
+#
+# 1153.ESCExtStatus4.uavcan ESC Status pack
+#
+
+OVERRIDE_SIGNATURE 0x2362AB78CD12F03A
+
+int16 mos_temp #MOS Tube temperature
+
+int16 idq1_100ma #d-q axis current
+
+int16 vdq1_duty #d-q axis voltage
+
+uint8[<=32] rsvd

@@ -1,0 +1,13 @@
+#
+# 1152.ESCExtStatus3.uavcan ESC Status pack
+#
+
+OVERRIDE_SIGNATURE 0x2362AB78CD12F03A
+
+int16 alg_err #Algorithmic error word
+
+int16 alg_warn #Algorithmic warning word
+
+int16 vdq0_duty #d-q axis voltage
+
+uint8[<=32] rsvd
