@@ -1,0 +1,13 @@
+#
+# 1154.ESCExtStatus5.uavcan ESC Status pack
+#
+
+OVERRIDE_SIGNATURE 0x2362AB78CD12F03A
+
+int16 idc #Estimated busbar current
+
+int16 cap_temp #Capacitor temperature in 0.1 degrees Celsius
+
+int16 motor_temp #Motoe temperature in 0.1 degrees Celsius
+
+uint8[<=32] rsvd

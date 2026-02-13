@@ -1,0 +1,11 @@
+#
+# 1150.ESCExtStatus1.uavcan ESC Status pack
+#
+
+OVERRIDE_SIGNATURE 0x2362AB78CD12F03A
+
+int16 esc_cmd #Throttle commands
+
+int16 spd_rpm #Motor speed
+
+uint8[<=32] rsvd

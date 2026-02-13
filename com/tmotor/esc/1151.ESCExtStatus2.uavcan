@@ -1,0 +1,13 @@
+#
+# 1151.ESCExtStatus2.uavcan ESC Status pack
+#
+
+OVERRIDE_SIGNATURE 0x2362AB78CD12F03A
+
+int16 vdc_100mv #Busbar voltage
+
+int16 irms_100ma #RMS phase current
+
+int16 idq0_100ma #d-q axis current
+
+uint8[<=32] rsvd
