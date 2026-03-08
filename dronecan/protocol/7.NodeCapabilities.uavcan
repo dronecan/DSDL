@@ -1,0 +1,59 @@
+# NodeCapabilities messages
+
+# this message contains information about the capabilities of the node sending the messgage,
+# or if the authoritative flag is set, then it announces the mininum capabilities of all nodes on the bus
+
+# a node should not activate a capability until it has seen an
+# authoritative announcement that the mininum capability on the bus
+# includes the corresponding capability. For example, if a node is
+# capable of doing 8MBit FDCAN then it should set the
+# FLAG_FDCAN_4M_SUPPORT in its announcements, but not start using 4M
+# FDCAN until it has seen an authoritative message with the
+# FLAG_FDCAN_4M_SUPPORT bit set in flags.
+
+# on receipt of this message all nodes should set their active
+# capabilities to the minimum of the received message capabilities and
+# their current capabilities. For example, this means if a node is
+# currently using FDCAN 4M and it sees a packet (whether authoritative
+# or not) without the FDCAN 4M flag set then it should stop using
+# FDCAN and fall back to the next lowest level (in the case of 4M
+# FDCAN this would be 1M bxCAN)
+
+# the central server (usually the DNA server) collates the
+# capabilities of all nodes on the bus and is responsible for
+# announcing the minimum capabilities with the authoritative flag
+# set. The central server will also send an announcement with its own
+# capabilities, which may be higher than the minimum on the bus. This
+# announcement of its own capabilities should not have the
+# authoritative flag set.
+
+# the central server may have a (possibibly configurable) delay
+# between when an increase in minimum network capability happens and
+# when it announces the upgraded capability. A delay on startup is a
+# good idea to allow time for legacy nodes to startup
+
+uint32 FLAG_AUTHORITATIVE         = 1
+# the PUBLISHER_ONLY bit should be set if this node only publishes data, most sensor
+# nodes should set this bit
+uint32 FLAG_PUBLISHER_ONLY        = 2
+uint32 FLAG_FDCAN_4M_SUPPORT      = 4
+uint32 FLAG_FDCAN_8M_SUPPORT      = 8
+uint32 FLAG_TAO_DISABLE_SUPPORT   = 16
+uint32 flags
+
+# the dronecan_messaging_level and dronecan_publisher_messaging_level
+# fields gives information on what DroneCAN messages are supported by
+# the node making the announcement, or in the case of the central
+# server, the minimum levels across the whole bus.
+
+# Messaging levels are:
+
+# Level1: supports Fix2 GNSS message
+# if all nodes that are not publisher-only support this level then
+# GNSS nodes can choose to not send older GNSS Fix messages
+
+uint16 DRONECAN_LEVEL_LEGACY      = 0
+uint16 DRONECAN_LEVEL_LEVEL1      = 1
+
+uint16 dronecan_messaging_level
+uint16 dronecan_publisher_messaging_level
