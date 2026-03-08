@@ -1,0 +1,36 @@
+# a message to inform ADSB devices about the state of the aircraft
+#  they are attached to.  Designed to be sent at relatively high rates,
+#  as opposed the 20791.ConfigureEmitter.
+# heavily influences by MAVLink message UAVIONIX_ADSB_OUT_DYNAMIC
+
+# geographic coordinates; same units as TrafficReport
+int32 longitude_deg_1e7            # Longitude degrees multiplied by 1e7
+int32 latitude_deg_1e7             # Latitude degrees multiplied by 1e7
+
+# note supplying of altitude in many ways as we don't know what the
+# transmitter wants:
+
+float32 alt_elipsoid # height above elipsoid in metres.  NAN if not valid
+float32 alt_msl      # height AMSL in metres.  NAN if not valid
+float32 alt_baro_msl # height AMSL in metres as measured by barometric pressure.  NAN if not valid
+
+uint3 GPS_FIX_NONE_0 = 0
+uint3 GPS_FIX_NONE_1 = 1
+uint3 GPS_FIX_2D = 2
+uint3 GPS_FIX_3D = 3
+uint3 GPS_FIX_DGPS = 4
+uint3 GPS_FIX_RTK_FLOAT = 5
+uint3 GPS_FIX_RTK_FIXED = 6
+uint3 gps_fix_type  # enumerated value
+
+uint8 num_sats
+
+float16 horizontal_accuracy  # m
+float16 vertical_accuracy    # m
+float16 velocity_accuracy    # m/s
+
+float16[3] ned_velocity            # NED frame (north-east-down) in meters per second
+
+uint8 STATE_AUTOPILOT_ENABLED = 0
+uint8 STATE_ON_GROUND = 1
+uint8 state  # bitmask

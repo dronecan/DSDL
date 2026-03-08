@@ -1,0 +1,106 @@
+# A message to configure devices such as ADSB transponders.  The
+#  information in this message is the relatively-static information a
+#  transponder might needs, and does not include dynamic data such as
+#  current vehicle position.
+
+# this message heavily influenced by the uAvionix MAVLink
+#  configuration messages.
+
+# Network-synchronized timestamp, 0 if not available. Note: not necessarily a UTC time.
+uavcan.Timestamp timestamp
+
+# icao address
+uint32 icao_address
+
+# vehicle callsign
+uint8[9] callsign
+
+# Mode A code (typically 1200 [0x04B0] for VFR):
+uint16 squawk
+
+# ADSB traffic/emitter type (copied from TrafficReport message)
+uint5 TRAFFIC_TYPE_UNKNOWN = 0
+uint5 TRAFFIC_TYPE_LIGHT = 1
+uint5 TRAFFIC_TYPE_SMALL = 2
+uint5 TRAFFIC_TYPE_LARGE = 3
+uint5 TRAFFIC_TYPE_HIGH_VORTEX_LARGE = 4
+uint5 TRAFFIC_TYPE_HEAVY = 5
+uint5 TRAFFIC_TYPE_HIGHLY_MANUV = 6
+uint5 TRAFFIC_TYPE_ROTOCRAFT = 7
+uint5 TRAFFIC_TYPE_GLIDER = 9
+uint5 TRAFFIC_TYPE_LIGHTER_THAN_AIR = 10
+uint5 TRAFFIC_TYPE_PARACHUTE = 11
+uint5 TRAFFIC_TYPE_ULTRA_LIGHT = 12
+uint5 TRAFFIC_TYPE_UAV = 14
+uint5 TRAFFIC_TYPE_SPACE = 15
+uint5 TRAFFIC_TYPE_EMERGENCY_SURFACE = 17
+uint5 TRAFFIC_TYPE_SERVICE_SURFACE = 18
+uint5 TRAFFIC_TYPE_POINT_OBSTACLE = 19
+uint5 traffic_type  # enumerated
+
+uint5  AIRCRAFT_SIZE_NO_DATA   = 0
+uint5  AIRCRAFT_SIZE_L15M_W23M = 1
+uint5  AIRCRAFT_SIZE_L25M_W28P5M = 2
+uint5  AIRCRAFT_SIZE_L25_34M   = 3
+uint5  AIRCRAFT_SIZE_L35_33M   = 4
+uint5  AIRCRAFT_SIZE_L35_38M   = 5
+uint5  AIRCRAFT_SIZE_L45_39P5M = 6
+uint5  AIRCRAFT_SIZE_L45_45M   = 7
+uint5  AIRCRAFT_SIZE_L55_45M   = 8
+uint5  AIRCRAFT_SIZE_L55_52M   = 9
+uint5  AIRCRAFT_SIZE_L65_59P5M = 10
+uint5  AIRCRAFT_SIZE_L65_67M  = 11
+uint5  AIRCRAFT_SIZE_L75_W72P5M = 12
+uint5  AIRCRAFT_SIZE_L75_W80M = 13
+uint5  AIRCRAFT_SIZE_L85_W80M = 14
+uint5  AIRCRAFT_SIZE_L85_W90M = 15
+uint5  aircraft_size  # enumerated
+
+uint4 GPS_OFFSET_LAT_NO_DATA = 0
+uint4 GPS_OFFSET_LAT_LEFT_2M = 1
+uint4 GPS_OFFSET_LAT_LEFT_4M = 2
+uint4 GPS_OFFSET_LAT_LEFT_6M = 3
+uint4 GPS_OFFSET_LAT_RIGHT_0M = 4
+uint4 GPS_OFFSET_LAT_RIGHT_2M = 5
+uint4 GPS_OFFSET_LAT_RIGHT_4M = 6
+uint4 GPS_OFFSET_LAT_RIGHT_6M = 7
+uint4 gps_lat_offset
+
+uint4 GPS_OFFSET_LON_NO_DATA = 0
+uint4 GPS_OFFSET_LON_APPLIED_BY_SENSOR = 1
+uint4 gps_offset_lon
+
+
+uint8 stall_speed  # m/s
+
+# several bits in this informed by UAVIONIX_ADSB_OUT_CONTROL_STATE
+uint16 RF_SELECT_RX_ENABLED = 0
+uint16 RF_SELECT_TX_1090_ENABLED = 1
+uint16 RF_SELECT_TX_MODE_A_ENABLED = 2
+uint16 RF_SELECT_TX_MODE_B_ENABLED = 3
+uint16 RF_SELECT_TX_MODE_C_ENABLED = 4
+uint16 RF_SELECT_TX_MODE_S_ENABLED = 5
+uint16 RF_SELECT_TX_IDENT_ENABLED = 6
+uint16 RF_SELECT_TX_XBIT_ENABLED = 7
+uint16 rf_select  # bitmask
+
+# the following field is suggested by the
+#  UAVIONIX_ADSB_OUT_CFG_REGISTRATION message:
+uint8[9] registration  # guaranteed null-terminated
+
+# the following field is suggested by the
+#  UAVIONIX_ADSB_OUT_CFG_FLIGHTID mavlink message:
+uint8[9] flight_id  # guaranteed null-terminated
+
+# the following fields are suggested by the UAVIONIX_ADSB_OUT_CONTROL
+#  mavlink message
+
+uint16 EMERGENCY_NONE
+uint16 EMERGENCY_GENERAL
+uint16 EMERGENCY_LIFEGUARD
+uint16 EMERGENCY_MINIMUM_FUEL
+uint16 EMERGENCY_NO_COMM
+uint16 EMERGENCY_UNLAWFUL_INTERFERANCE
+uint16 EMERGENCY_DOWNED_AIRCRAFT
+uint16 EMERGENCY_RESERVED
+uint16 emergency  # enumerated
