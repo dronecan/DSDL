@@ -1,0 +1,30 @@
+#
+# Actuator channel config.
+#
+# Entry at index i configures the handling of ArrayCommand commands where
+# Command.actuator_id == i.
+#
+# A receiver whose own actuator_id matches mapped_actuator_id[i] shall route
+# that command to its local output channel actuator_channel[i].
+#
+# mapped_actuator_id is a user-assigned node identifier, independent of the CAN node ID
+# (e.g. set via DIP switch). Valid range: 0..254. NOT_CONFIGURED (255) marks unused entries.
+#
+# Local outputs not covered by any matching entry shall be treated as uncontrolled.
+#
+# Duplicate entries with the same mapped_actuator_id and actuator_channel are a
+# configuration error. The behavior is undefined.
+#
+# The sender shall publish this message periodically at low rate and is responsible for retaining the
+# configuration persistently. Receivers do not need to persist the mapping to non-volatile storage.
+#
+# Receivers configured to use this message shall not process ArrayCommand
+# until at least one ChannelConfig has been received.
+#
+# Nodes not configured to use this message shall process all commands according to their rules.
+#
+
+uint8 NOT_CONFIGURED = 255
+
+uint8[<=30] mapped_actuator_id
+uint8[<=30] actuator_channel
