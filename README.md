@@ -23,4 +23,37 @@ For service types, the following should be used:
  - [100, 200) Reserved for future use
  - [200, 256) Vendor-specific service types
 
+Vendor message ID allocations
+------------------------------
+
+To request a block, open a PR adding a row to this table.
+Companies are generally allocated a block of 20 IDs.
+
+| Range           | Namespace           | Owner     | Type    |
+|-----------------|---------------------|-----------|---------|
+| 20000 - 20019   | ardupilot.*         | ArduPilot | Project |
+| 20020 - 20039   | com.volz.*          | Volz      | Company |
+| 20050 - 20069   | com.hobbywing.*     | HobbyWing | Company |
+| 20070 - 20089   | com.tmotor.*        | T-Motor   | Company |
+| 20110 - 20129   | com.himark.*        | Himark    | Company |
+| 20200 - 20219   | com.hex.*           | Hex       | Company |
+| 20300 - 20319   | com.xacti.*         | Xacti     | Company |
+| 20720 - 20799   | ardupilot.*         | ArduPilot | Project |
+| 20800 - 20899   | px4.*               | PX4       | Project |
+| 20900 - 20919   | com.auterion.*      | Auterion  | Company |
+
+Legacy allocations (IDs outside the blocks above, predating this table):
+
+| IDs in use                   | Namespace           |
+|------------------------------|---------------------|
+| 1033, 1035, 1038, 1039, 1332 | com.tmotor.*        |
+| 2018, 2019                   | com.himark.*        |
+| 20009                        | mppt.*              |
+| 20013                        | com.hobbywing.*     |
+| 20030 - 20035                | dronecan.remoteid.* |
+| 20100                        | com.hobbywing.*     |
+| 20300                        | cuav.*              |
+| 20402, 20407, 20554          | com.xacti.*         |
+| 21910                        | ardupilot.*         |
+
 * [**DroneCAN website**](http://dronecan.org)
