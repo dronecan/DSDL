@@ -1,0 +1,18 @@
+#
+# Ion Module State
+#
+# Reports application-specific operational state for an Ion module.
+#
+# This message complements uavcan.protocol.NodeStatus.
+# Generic node health and operating mode shall be reported using
+# uavcan.protocol.NodeStatus.
+#
+
+uint8 MODULE_OFF  = 0
+uint8 MODULE_ON  = 1
+uint8 MODULE_TIMER_COMPLETE = 2
+uint8 MODULE_READY = 3
+
+float16 supply_voltage
+uint8 module_state
+uint32 timer_elapsed_ms
