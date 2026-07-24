@@ -1,0 +1,18 @@
+#
+# Provide information on the CAN bus configuration
+#
+
+# Common CAN bitrates
+uint32 CAN_BITRATE_1MBPS = 1000000
+uint32 CAN_BITRATE_2MBPS = 2000000
+uint32 CAN_BITRATE_4MBPS = 4000000
+uint32 CAN_BITRATE_5MBPS = 5000000
+uint32 CAN_BITRATE_8MBPS = 8000000
+
+# CAN variants
+uint3 CAN_CLASSIC = 0
+uint3 CAN_FD = 1
+
+uint32 bit_rate         # bit rate
+uint3  variant          # 0: classsic CAN, 1: CAN FD, 2-7: for future variants like XL
+uint5  reserved
