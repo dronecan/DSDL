@@ -1,0 +1,37 @@
+#
+#   BMS charge current request
+#
+#   Broadcast by a battery pack to tell the charge source how much current it
+#   can currently accept. Sent continuously, not only when something is wrong,
+#   so a consumer always has a live figure and can tell "no limit needed" from
+#   "the pack has gone silent".
+#
+#   ADVISORY. The pack cannot enforce this. On a hybrid system the battery is a
+#   buffer across a running generator, so a pack that simply opened its charge
+#   FET would strand the generator's output and overvolt the bus into the
+#   avionics. Refusing charge is not available to it; asking is all it can do.
+#
+#   Consumers should apply the MINIMUM of the limits published by all packs
+#   present, not the sum. Two packs in parallel share whatever the generator
+#   delivers, and nothing enforces an even split - a pack that is absent,
+#   condemned, failed or merely at a higher state of charge leaves its neighbour
+#   carrying the lot.
+#
+
+uint8   battery_id                  #       Matches BatteryInfo.battery_id
+
+float16 requested_current_limit     # [A]   Maximum charge current this pack can
+                                    #       accept right now. Zero means stop
+                                    #       charging entirely.
+
+float16 nominal_current_limit       # [A]   What this pack can accept when
+                                    #       nothing is wrong, so a consumer can
+                                    #       tell a reduction from a low rating.
+
+uint8 REASON_NONE               = 0
+uint8 REASON_OVER_CURRENT       = 1     # bit 0: taking more than this pack's share
+uint8 REASON_COLD               = 2     # bit 1: below the safe charge temperature
+uint8 REASON_HOT                = 4     # bit 2: above the safe charge temperature
+uint8 REASON_CELL_OVERVOLTAGE   = 8     # bit 3: a cell has reached its limit
+uint8 REASON_PACK_FAULT         = 16    # bit 4: pack condemned, or AFE not trusted
+uint8 reason_flags
