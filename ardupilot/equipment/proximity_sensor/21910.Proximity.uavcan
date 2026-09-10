@@ -1,18 +1,22 @@
 #
 # Proximity data
 #
-uint8 sensor_id                      # Sensor ID
+uint8 sensor_id                           # Sensor ID. Must match PRXn_ADDR, valid range 0-127.
 
-uint3 READING_TYPE_NO_DATA   = 0     # Distance is unknown
-uint3 READING_TYPE_NOT_CONNECTED = 1 # Distance field contains valid distance
-uint3 READING_TYPE_GOOD   = 2        # Distance field contains valid reading for the sensor
+uint3 READING_TYPE_NO_DATA            = 0 # Sensor faulted or blinded, distance unknown. Sensor unhealthy.
+uint3 READING_TYPE_NOT_CONNECTED      = 1 # Sensor element not connected or not responding. Sensor unhealthy.
+uint3 READING_TYPE_GOOD               = 2 # Sensor healthy, distance field holds a valid measurement.
+uint3 READING_TYPE_GOOD_NO_DETECTIONS = 3 # Sensor healthy, no target within range on this beam.
+                                          # distance is not valid and must be ignored; senders shall set it to 0.
+                                          # yaw and pitch remain valid and identify the beam that is clear.
 
-uint3 reading_type                   # Sensor Status
+uint3 reading_type                        # One of READING_TYPE_*
 
-uint5 flags                          # Reserved
+uint5 flags                               # Reserved. Set to FLAGS_NONE.
 uint5 FLAGS_NONE = 0
 
-float16 yaw                          # Degrees in body frame
-float16 pitch                        # Degrees in body frame
-float16 distance                     # Meters
-
+float16 yaw                               # Degrees in body frame. 0 = nose, positive clockwise seen from above.
+                                          # Valid for all reading types.
+float16 pitch                             # Degrees in body frame. 0 = horizontal, positive up.
+                                          # Valid for all reading types.
+float16 distance                          # Meters. Valid only when reading_type is READING_TYPE_GOOD.
