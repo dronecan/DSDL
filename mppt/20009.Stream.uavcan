@@ -17,3 +17,5 @@ float16 input_power # [Watt]
 float16 output_voltage # [Volt]
 float16 output_current # [Amp]
 float16 output_power # [Watt]
+
+float16 efficiency # Conversion efficiency, output power / input power, 0.0 to 1.0
